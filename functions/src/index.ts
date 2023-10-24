@@ -1,11 +1,11 @@
 import express from 'express';
 import 'dotenv/config';
-import routes from './routes/mainRoutes';
 import { db } from './config/db/db.connection';
 import middleWares from './middlewares';
 import errorHandler from './middlewares/errorHandler';
 import * as functions from 'firebase-functions';
 import mainRoutes from './routes/mainRoutes';
+import routes from './routes/index'
 import corsMiddleware from './middlewares/corsMiddleware';
 
 const app = express();

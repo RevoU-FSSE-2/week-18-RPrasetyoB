@@ -18,7 +18,7 @@ const authorization = (allowedRoles) => {
             return res.status(401).send({ message: "Unauthorized, please login" });
         }
         try {
-            if (req.userRole && !allowedRoles.includes(userRole)) {
+            if (!allowedRoles.includes(userRole)) {
                 return res.status(403).send({ message: "Access forbidden: Role not allowed" });
             }
             next();

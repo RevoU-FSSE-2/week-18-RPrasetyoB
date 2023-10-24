@@ -58,15 +58,15 @@ exports.regUser = regUser;
 const update = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const decodedToken = (0, getToken_1.getToken)(req);
-        const { userRole } = (0, getToken_1.loggedUser)(decodedToken);
         if (!decodedToken) {
             return res.status(401).json({ success: false, message: "Unauthorized: please login" });
         }
-        if (userRole !== 'admin') {
-            return res.status(403).json({ success: false, message: "Unauthorized: Insufficient Permissions" });
+        const { id } = req.params;
+        const { role } = req.body;
+        const updatedRole = yield (0, userService_1.updateRole)({ id, role });
+        if (role !== "guest" && role !== "admin") {
+            return res.status(404).json({ success: false, message: "Allowed role only 'admin' or 'guest'" });
         }
-        const { username, role } = req.body;
-        const updatedRole = yield (0, userService_1.updateRole)({ username, role });
         if (updatedRole.success) {
             return res.status(200).json({ success: true, message: 'Role updated successfully', updatedRole });
         }

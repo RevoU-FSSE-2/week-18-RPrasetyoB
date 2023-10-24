@@ -12,18 +12,27 @@ const partnerOrigin = [
     "https://week15-rpb-y.netlify.app"
 ];
 const corsOptions = (req, callback) => {
+    var _a;
     const clientOrigin = origin.includes(req.header("Origin"));
     const clientPartnerOrigin = partnerOrigin.includes(req.header("Origin"));
+    const isPostman = (_a = req.header("User-Agent")) === null || _a === void 0 ? void 0 : _a.includes("Postman");
     if (clientOrigin) {
         callback(null, {
             origin: true,
-            methods: 'GET, POST, DELETE, PUT, OPTIONS, HEAD'
+            methods: 'GET, POST, DELETE, PUT, OPTIONS, HEAD',
         });
     }
     else if (clientPartnerOrigin) {
         callback(null, {
             origin: true,
-            methods: 'GET, POST'
+            methods: 'GET, POST',
+        });
+    }
+    else if (isPostman) {
+        // Allow Postman to access your API
+        callback(null, {
+            origin: 'https://www.getpostman.com',
+            methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
         });
     }
     else {

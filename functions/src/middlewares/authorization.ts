@@ -13,7 +13,7 @@ const authorization = (allowedRoles: ('admin' | 'guest')[]) => {
 
     try {
       
-      if (req.userRole && !allowedRoles.includes(userRole)) {
+      if (!allowedRoles.includes(userRole)) {
         return res.status(403).send({ message: "Access forbidden: Role not allowed" });
       }
 

@@ -127,13 +127,13 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
 });
 exports.registerUser = registerUser;
 //------ update user role ------
-const updateRole = ({ username, role }) => __awaiter(void 0, void 0, void 0, function* () {
+const updateRole = ({ id, role }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const response = yield schema_1.userModel.findOneAndUpdate({ username: username }, { role: role }, { new: true });
+        const response = yield schema_1.userModel.findByIdAndUpdate(id, { role: role }, { new: true });
         if (response) {
             return {
                 success: true,
-                message: response
+                data: response
             };
         }
         else {

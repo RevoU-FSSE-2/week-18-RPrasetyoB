@@ -17,7 +17,7 @@ interface RegisterInput {
     password: string;
 }
 interface UserRole {
-    username: string;
+    id: string;
     role: string;
 }
 
@@ -128,17 +128,17 @@ const registerUser = async ({ username, email, password}: RegisterInput) => {
 }
 
 //------ update user role ------
-const updateRole = async ({ username, role }: UserRole) => {
+const updateRole = async ({ id, role }: UserRole) => {
     try {
-      const response = await userModel.findOneAndUpdate(
-        { username: username },
+      const response = await userModel.findByIdAndUpdate(
+        id,
         { role: role },
         { new: true }
       );  
       if (response) {
         return {          
           success: true,
-          message: response
+          data: response
         };
       } else {
         throw new Error("User not found");

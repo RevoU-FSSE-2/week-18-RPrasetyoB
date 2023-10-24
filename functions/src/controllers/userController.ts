@@ -46,20 +46,17 @@ const regUser = async (req : Request, res: Response, next: NextFunction) => {
 const update = async (req: Request, res: Response, next: NextFunction) => {
   try {
   const decodedToken = getToken(req)
-  const { userRole } = loggedUser(decodedToken);
 
     if (!decodedToken) {
       return res.status(401).json({ success: false, message: "Unauthorized: please login" });
     }
-
-    if (userRole !== 'admin') {
-      return res.status(403).json({ success: false, message: "Unauthorized: Insufficient Permissions" });
+    const { id } = req.params
+    const { role } = req.body;
+    const updatedRole = await updateRole({ id, role});
+    if(role !==  "guest" && role !== "admin") {
+      return res.status(404).json({ success: false, message: "Allowed role only 'admin' or 'guest'" });
     }
-    
-    const { username, role } = req.body;
-    const updatedRole = await updateRole({ username, role });
-
-    if (updatedRole.success) {
+    if(updatedRole.success) {
       return res.status(200).json({ success: true, message: 'Role updated successfully', updatedRole });
     } else {
       return res.status(404).json({ success: false, message: 'User not found' });

@@ -1,6 +1,6 @@
 import { Express } from "express";
 // import cookieMidleware from "./cookiesParser";
-// import morganApp from "./morgan";
+import morganApp from "./morganApp";
 import { xRequestId } from "./xRequest-id";
 import helmetApp from "./helmetApp";
 
