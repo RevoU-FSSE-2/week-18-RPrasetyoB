@@ -22,9 +22,9 @@ const getMakerTodos = async (username?: string) => {
 };
 
 // ------ update todo ------
-const updateMakerTodos = async (id: string, todo:string, status: string, dueDate: Date) => {
+const updateMakerTodos = async (id: string, todo:string, status: string, priority: string, dueDate: Date) => {
   try {
-    const todoUpdate = await todoModel.findByIdAndUpdate(id, { todo: todo, status: status, dueDate: dueDate });
+    const todoUpdate = await todoModel.findByIdAndUpdate(id, { todo: todo, status: status, priority: priority, dueDate: dueDate },{new:true});
 
     return {
       success: true,

@@ -102,6 +102,7 @@ exports.createTodo = createTodo;
 const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const decodedToken = (0, getToken_1.getToken)(req);
     const { username } = (0, getToken_1.loggedUser)(decodedToken);
+    console.log('logged', username);
     if (!decodedToken) {
         return res.status(401).json({
             success: false,
@@ -119,15 +120,16 @@ const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 data: null,
             };
         }
-        const { todo, status, dueDate } = req.body;
-        if (!todo && !status && !dueDate) {
+        const { todo, status, priority, dueDate } = req.body;
+        if (!todo && !status && !dueDate && !priority) {
             return res.status(400).json({
                 success: false,
-                message: "At least one of 'todo', 'status' or 'dueDate' is required for update todo",
+                message: "At least one of 'todo', 'status', 'priority' or 'dueDate' is required for update todo",
             });
         }
-        const updatedStatus = yield (0, todoService_1.updateMakerTodos)(id, todo, status, dueDate);
-        if (updatedStatus && (todoId === null || todoId === void 0 ? void 0 : todoId.maker) == username) {
+        const updatedStatus = yield (0, todoService_1.updateMakerTodos)(id, todo, status, priority, dueDate);
+        console.log('user', todoId.maker);
+        if (updatedStatus && todoId.maker == username) {
             if (updatedStatus.success) {
                 return res.status(200).json({
                     success: true,

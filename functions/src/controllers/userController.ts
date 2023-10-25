@@ -10,6 +10,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, password } = req.body;
     const result = await loginUser({ username, password });
+    console.log('user', result.data.username)
     if (result.success) {
       const token = jwt.sign({_id : result.data._id, username: result.data.username, role: result.data.role}, JWT_Sign)
       return res.status(200).json({

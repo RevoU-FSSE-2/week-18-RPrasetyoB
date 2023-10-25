@@ -91,6 +91,7 @@ const createTodo = async (req: Request, res: Response) => {
 const updateTodo = async (req: Request, res: Response) => {
   const decodedToken = getToken(req)
   const { username } = loggedUser(decodedToken);
+console.log('logged',username)
   if(!decodedToken){
     return res.status(401).json({
       success: false,
@@ -99,7 +100,7 @@ const updateTodo = async (req: Request, res: Response) => {
   }
   try {
     const { id } = req.params;
-    const todoId = await todoModel.findOne({ _id: id });
+    const todoId = await todoModel.findOne({_id:id});
     if (!todoId) {
       return {
         success: false,
@@ -109,16 +110,17 @@ const updateTodo = async (req: Request, res: Response) => {
       };
     }
 
-    const { todo, status, dueDate } = req.body;
-    if (!todo && !status && !dueDate) {
+    const { todo, status, priority, dueDate } = req.body;
+    if (!todo && !status && !dueDate && !priority) {
       return res.status(400).json({
         success: false,
-        message: "At least one of 'todo', 'status' or 'dueDate' is required for update todo",
+        message: "At least one of 'todo', 'status', 'priority' or 'dueDate' is required for update todo",
       });
     }
 
-    const updatedStatus = await updateMakerTodos(id , todo, status, dueDate);
-    if(updatedStatus && todoId?.maker == username){
+    const updatedStatus = await updateMakerTodos(id , todo, status, priority, dueDate);
+  console.log('user', todoId.maker)
+    if(updatedStatus && todoId.maker == username){
       if (updatedStatus.success) {
         return res.status(200).json({
           success: true,

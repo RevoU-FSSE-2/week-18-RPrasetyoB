@@ -37,9 +37,9 @@ const getMakerTodos = (username) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.getMakerTodos = getMakerTodos;
 // ------ update todo ------
-const updateMakerTodos = (id, todo, status, dueDate) => __awaiter(void 0, void 0, void 0, function* () {
+const updateMakerTodos = (id, todo, status, priority, dueDate) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const todoUpdate = yield schema_1.todoModel.findByIdAndUpdate(id, { todo: todo, status: status, dueDate: dueDate });
+        const todoUpdate = yield schema_1.todoModel.findByIdAndUpdate(id, { todo: todo, status: status, priority: priority, dueDate: dueDate }, { new: true });
         return {
             success: true,
             status: 200,

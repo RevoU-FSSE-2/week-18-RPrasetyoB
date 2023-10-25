@@ -5,7 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("cors"));
 const origin = [
-    "https://week15-rpb-x.netlify.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://week-15-rprasetyob-production.up.railway.app"
 ];
 const partnerOrigin = [

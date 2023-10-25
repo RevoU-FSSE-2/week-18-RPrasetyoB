@@ -2,7 +2,8 @@ import cors, { CorsOptions } from "cors";
 import { Application, Request } from "express";
 
 const origin = [
-    "https://week15-rpb-x.netlify.app",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
     "https://week-15-rprasetyob-production.up.railway.app"
 ];
 
