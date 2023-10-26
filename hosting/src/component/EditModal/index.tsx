@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, Button, DialogActions } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, TextField, Button, DialogActions, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,24 +10,27 @@ import { ApiUrl } from '../../utils/api';
 import { useGetToken } from '../../hook';
 import { AppContext } from "../../provider/AppProvider";
 
-interface editValue {
-  _id:string;
-  todo:string;
-  dueDate:string;
-}
-
 interface EditModalProps {
   open: boolean;
   onClose: () => void;
   editTodo: {
     _id: string;
     todo: string;
+    status: string;
     dueDate: string;
+    priority: string;
+    maker: string;
   };
   handleEditInputChange: (event: EditInputChangeEvent) => void;
   handleCloseBackDrop: () => void;
 }
 
+interface Todo {
+  _id: string;
+  todo: string;
+  status: string;
+  dueDate: string;
+}
 interface EditInputChangeEvent {
   target: {
     name: string;
@@ -58,8 +61,9 @@ const EditModal: React.FC<EditModalProps> = (props) => {
     const token = useGetToken()
     const formattedDueDate = newDueDate ? format(newDueDate, "yyyy-MM-dd") : "";
     const newTodo = editTodo.todo ? editTodo.todo : todoItem?.todo;
+    const newStatus = editTodo.status ? editTodo.status : todoItem?.status;
     const newDate = formattedDueDate ? formattedDueDate : todoItem?.dueDate;
-    const body = { todo: newTodo, dueDate: newDate };
+    const body = { todo: newTodo, status: newStatus, dueDate: newDate };
     const Url = ApiUrl + `/v1/todos/${editTodo._id}`;
   console.log(' editodo', editTodo)
     try {
@@ -79,20 +83,24 @@ const EditModal: React.FC<EditModalProps> = (props) => {
           title: "Edit",
           text: "Todo edited successfully",
         });
-        setTodolist((prevTodolist) => {
-          return prevTodolist.map((task) => {
-            if (task._id === editTodo._id) {
-              return { ...task, todo: newTodo!, dueDate: formattedDueDate };
-            } else {
-              return task;
-            }
-          });
-        });        
-      } else {
+        const updatedTodo = {
+          _id: editTodo._id,
+          todo: newTodo || editTodo.todo,
+          status: newStatus || editTodo.status,
+          dueDate: formattedDueDate || editTodo.dueDate,
+          priority: editTodo.priority, 
+          maker: editTodo.maker,
+        };
+        setTodolist((prevTodolist) =>
+          prevTodolist.map((task) =>
+            task._id === updatedTodo._id ? updatedTodo : task
+          )
+        );        
+      } else if(response?.status === 403){
         Swal.fire({
           icon: "error",
           title: "Edit Failed",
-          text: "Failed to edit todo",
+          text: "You Unauthorized to edit todo",
         });
       }
     } catch (error) {
@@ -127,8 +135,25 @@ const EditModal: React.FC<EditModalProps> = (props) => {
             name="todo"
             defaultValue={todoItem?.todo}
             onChange={handleEditInputChange}
+            required
           />
         </div>
+        <FormControl>
+          <InputLabel htmlFor="status">Status</InputLabel>
+          <Select
+            labelId="status"
+            name= "status"
+            label="status"
+            defaultValue={todoItem?.status}
+            onChange={handleEditInputChange}
+            value={editTodo.status}
+            fullWidth
+            required
+            >
+            <MenuItem value={'in progress'}>in progress</MenuItem>
+            <MenuItem value={'done'}>done</MenuItem>
+          </Select>
+        </FormControl>
         <div>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DemoContainer components={['DatePicker']}>
@@ -150,7 +175,8 @@ const EditModal: React.FC<EditModalProps> = (props) => {
         }}>Cancel</Button>
         <Button onClick={() => {
           handleEditSubmit();
-          handleCloseBackDrop();
+          onClose();
+          handleCloseBackDrop()
         }} color="primary">
           Update
         </Button>

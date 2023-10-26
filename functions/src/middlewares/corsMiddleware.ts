@@ -4,7 +4,7 @@ import { Application, Request } from "express";
 const origin = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://week-15-rprasetyob-production.up.railway.app"
+    "https://milestone3-rpb.web.app"
 ];
 
 const partnerOrigin = [
@@ -29,7 +29,7 @@ const corsOptions = (req: Request | any, callback: (err: Error | null, options?:
     } else if (isPostman) {
         // Allow Postman to access your API
         callback(null, {
-            origin: 'https://www.getpostman.com', // Replace with the actual Postman domain
+            origin: 'https://www.getpostman.com',
             methods: 'GET, POST, PUT, DELETE, OPTIONS, HEAD',
         });
     } else {

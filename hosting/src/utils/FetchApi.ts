@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { ApiUrl } from "./api";
 import { useGetToken } from "../hook";
-import { useContext } from "react";
-import { AppContext } from "../provider/AppProvider";
 
 interface LoginValue {
   username: string;
@@ -92,7 +90,7 @@ const useFetchApi = () => {
   const deleteTask = async (id: string) => {
     const token = useGetToken()
     try {
-      const Url = ApiUrl + `/v1/tasks/${id}`;
+      const Url = ApiUrl + `/v1/todos/${id}`;
       const response = await fetch(Url, {
         method: "DELETE",
         headers: {
@@ -110,6 +108,7 @@ const useFetchApi = () => {
     localStorage.removeItem('accessToken')
     navigate("/login");
     Swal.fire("Logged Out");
+    return null
   };
 
   return {

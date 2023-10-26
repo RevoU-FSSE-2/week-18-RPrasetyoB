@@ -1,36 +1,44 @@
 import { ReactNode, createContext, useState, Dispatch, SetStateAction } from 'react';
 
-interface Todolist {
-    slice(arg0: number, arg1: number): unknown;
+interface Todo {
     _id: string;
     todo: string;
     status: string;
     priority: string;
     dueDate: string;
-    maker:string;
+    maker: string;
 }
 
-interface ContextProps {
-    todolist: Todolist[];
-    setTodolist: Dispatch<SetStateAction<Todolist[]>>;
+interface User {
+    username: string;
+    role: string;
 }
-
 interface Props {
     children: ReactNode;
+}
+interface ContextProps {
+    todolist: Todo[];
+    setTodolist: Dispatch<SetStateAction<Todo[]>>;
+    user: User | null;
+    setUser: Dispatch<SetStateAction<User | null>>
 }
 
 const defaultValue: ContextProps = {
     todolist: [],
-    setTodolist: () => { }
+    setTodolist: () => {},
+    user: null,
+    setUser: () => {}
 };
 
 export const AppContext = createContext<ContextProps>(defaultValue);
 
 const AppProvider = ({ children }: Props) => {
-    const [todolist, setTodolist] = useState<Todolist[]>([]);
+    const [todolist, setTodolist] = useState<Todo[]>([]);
+    const [user, setUser] = useState<User | null>(null);
+
 
     return (
-        <AppContext.Provider value={{ todolist, setTodolist }}>
+        <AppContext.Provider value={{ todolist, setTodolist, user, setUser }}>
             {children}
         </AppContext.Provider>
     );

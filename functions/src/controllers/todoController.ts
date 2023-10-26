@@ -16,13 +16,17 @@ console.log('test', userRole, username )
         success: true,
         message: "Successfully fetched all todo",
         result: todo,
+        user: username,
+        role: userRole
       });
     } else if(userRole == "guest") {
       const todo = await getMakerTodos(username);
       return res.status(200).json({
         success: true,
         message: "Successfully fetched todos for the user",
-        data: todo,
+        result: todo,
+        user: username,
+        role: userRole
       });
     }
     else {
@@ -91,7 +95,6 @@ const createTodo = async (req: Request, res: Response) => {
 const updateTodo = async (req: Request, res: Response) => {
   const decodedToken = getToken(req)
   const { username } = loggedUser(decodedToken);
-console.log('logged',username)
   if(!decodedToken){
     return res.status(401).json({
       success: false,
@@ -118,9 +121,8 @@ console.log('logged',username)
       });
     }
 
-    const updatedStatus = await updateMakerTodos(id , todo, status, priority, dueDate);
-  console.log('user', todoId.maker)
-    if(updatedStatus && todoId.maker == username){
+    if(todoId.maker == username){
+      const updatedStatus = await updateMakerTodos(id , todo, status, priority, dueDate);
       if (updatedStatus.success) {
         return res.status(200).json({
           success: true,

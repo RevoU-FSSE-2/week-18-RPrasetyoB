@@ -25,6 +25,8 @@ const getAllTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 success: true,
                 message: "Successfully fetched all todo",
                 result: todo,
+                user: username,
+                role: userRole
             });
         }
         else if (userRole == "guest") {
@@ -32,7 +34,9 @@ const getAllTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(200).json({
                 success: true,
                 message: "Successfully fetched todos for the user",
-                data: todo,
+                result: todo,
+                user: username,
+                role: userRole
             });
         }
         else {
@@ -102,7 +106,6 @@ exports.createTodo = createTodo;
 const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const decodedToken = (0, getToken_1.getToken)(req);
     const { username } = (0, getToken_1.loggedUser)(decodedToken);
-    console.log('logged', username);
     if (!decodedToken) {
         return res.status(401).json({
             success: false,
@@ -127,9 +130,8 @@ const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 message: "At least one of 'todo', 'status', 'priority' or 'dueDate' is required for update todo",
             });
         }
-        const updatedStatus = yield (0, todoService_1.updateMakerTodos)(id, todo, status, priority, dueDate);
-        console.log('user', todoId.maker);
-        if (updatedStatus && todoId.maker == username) {
+        if (todoId.maker == username) {
+            const updatedStatus = yield (0, todoService_1.updateMakerTodos)(id, todo, status, priority, dueDate);
             if (updatedStatus.success) {
                 return res.status(200).json({
                     success: true,

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Form, Formik } from "formik";
 import { Button, TextField, Card, Typography, CardContent } from "@mui/material";
 import * as Yup from "yup";
@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import  useFetchApi  from "../../utils/FetchApi";
 import Swal from "sweetalert2";
 import { useFormik } from 'formik';
+import { AppContext } from "../../provider/AppProvider";
+import { useGetToken } from "../../hook";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -18,7 +20,7 @@ const initialValues = {
 };
 
 const Login: React.FC = () => {
-const { loginUser } = useFetchApi();
+  const { loginUser } = useFetchApi();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
