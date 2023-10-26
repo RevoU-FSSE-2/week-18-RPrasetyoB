@@ -1,3 +1,18 @@
+## Users for test
+- admin
+```json
+{
+  "username":"rpb"
+  "password":"rpb123"
+}
+```
+- guest
+```json
+  {
+  "username":"rpb2"
+  "password":"rpb123"
+}
+```
 ## Deployment
 - Front-end: https://milestone3-rpb.web.app
 - Back-end: https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
