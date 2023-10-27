@@ -128,13 +128,11 @@ if(todoId.maker == username){
 
 - Front-end :
   
-  ![2023-10-27-12-08-11-image.png](D:\bootcamp-revou\week18%20ML3\week-18-RPrasetyoB\assets\img\README\2023-10-27-12-08-11-image.png)
+  ![2023-10-27-12-08-11-image](https://github.com/RevoU-FSSE-2/week-18-RPrasetyoB/assets/129088807/349417d3-8c63-489b-bedf-37cd1fbec217)
 
 - Back-end:
   
-  ![2023-10-27-12-08-59-image.png](D:\bootcamp-revou\week18%20ML3\week-18-RPrasetyoB\assets\img\README\2023-10-27-12-08-59-image.png)
-
-
+  ![2023-10-27-12-08-59-image](https://github.com/RevoU-FSSE-2/week-18-RPrasetyoB/assets/129088807/f46fe5f6-8865-4560-9697-057aa762ebd3)
 
 ## Postmant API documentation
 
