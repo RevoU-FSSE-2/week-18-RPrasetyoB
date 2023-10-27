@@ -12,8 +12,8 @@
 
 |                                                                    | Endpoint               | Req body                  | Authorization |
 |:------------------------------------------------------------------ |:----------------------:|:-------------------------:|:-------------:|
-| Login                                                              | POST /v1/auth/login    | username, password        | -             |
-| Register                                                           | POST /v1/auth/register | username, Email, password | -             |
+| Login                                                              | POST<br>/v1/auth/login    | username, password        | -             |
+| Register                                                           | POST<br>/v1/auth/register | username, Email, password | -             |
 | Get all todolist (admin)<br/>Get logged in user's todolist (guest) | GET<br/>/v1/todos      | -                         | by role       |
 | Add new todo                                                       | POST<br/>/v1/todos     | todo, priority            | -             |
 | Update todo                                                        | PUT<br/>/v1/todos/:id  | todo, status, dueDate     | by username   |
