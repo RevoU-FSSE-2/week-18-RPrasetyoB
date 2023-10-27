@@ -138,6 +138,8 @@ if(todoId.maker == username){
 
 - Documentation link:<br>
     https://documenter.getpostman.com/view/29092304/2s9YRGw8Tq
+- Set variable {{base_url}} to:
+    https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
 
 ## API End Point
 
