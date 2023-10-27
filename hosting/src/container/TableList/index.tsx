@@ -175,7 +175,7 @@ const TableList: React.FC = () => {
     openEditModal()
   }
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 8;
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsOnCurrentPage = todolist.slice(startIndex, endIndex);

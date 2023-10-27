@@ -1,27 +1,58 @@
-## Postmant API documentation
+# Full-Stack Project milestone 3
 
-- Documentation link: - https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
+Development project from designing, building, and maintaining both the server-side (back end) and client-side (front end) components of an application. This individual manages the entire software stack, ensuring the integration and functionality of both ends for a complete user experience.
 
-- Fork documentation
 
-- Set variable {{based_url}} to: - https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
 
-- Consume the API
+## Table of content
 
-## ## API End Point
+- Technologies used
 
-|                                                                    | Endpoint               | Req body                  | Authorization |
-|:------------------------------------------------------------------ |:----------------------:|:-------------------------:|:-------------:|
-| Login                                                              | POST /v1/auth/login    | username, password        | -             |
-| Register                                                           | POST /v1/auth/register | username, Email, password | -             |
-| Get all todolist (admin)<br/>Get logged in user's todolist (guest) | GET<br/>/v1/todos      | -                         | by role       |
-| Add new todo                                                       | POST<br/>/v1/todos     | todo, priority            | -             |
-| Update todo                                                        | PUT<br/>/v1/todos/:id  | todo, status, dueDate     | by username   |
-| Delete todo                                                        | DEL<br/>/v1/todos/:id  |                           | by username   |
+- Front-end sneak peek
+
+- Authentication & Authorization
+
+- Security Test
+
+- API documentation
+
+- App testing
+
+- Deployment
+
+## Technologies  used
+
+- Typescript
+
+- BE: NodeJs / Express
+
+- FE: React
+
+
+
+## Front-end sneak peek
+
+![](assets/img/README/2023-10-27-18-48-41-image.png)
+
+## Back-end Authentication
+
+```js
+import { Request, Response, NextFunction } from 'express';
+
+const authentication = (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers.authorization    
+    if (!authHeader) {
+        res.status(401).json({ error: 'Acces forbidden' })
+    }
+    next()    
+}
+
+export default authentication
+```
 
 ## Back-end Authorization
 
-#### By Role :
+##### By Role :
 
 ```js
 //------ getTodo ------
@@ -66,7 +97,7 @@ console.log('test', userRole, username )
 };
 ```
 
-#### By Username :
+##### By Username :
 
 - update Todolist authorization
 
@@ -102,28 +133,55 @@ if(todoId.maker == username){
 - Back-end:
   
   ![2023-10-27-12-08-59-image.png](D:\bootcamp-revou\week18%20ML3\week-18-RPrasetyoB\assets\img\README\2023-10-27-12-08-59-image.png)
-  
-  ## Users for test
+
+
+
+## Postmant API documentation
+
+- Documentation link: - https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
+
+- Fork documentation
+
+- Set variable {{based_url}} to: - https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
+
+- Consume the API
+
+## API End Point
+
+|                                                                   | Endpoint               | Req body                  | Authorization |
+| ----------------------------------------------------------------- | ---------------------- | ------------------------- | ------------- |
+| Login                                                             | POST /v1/auth/login    | username, password        | -             |
+| Register                                                          | POST /v1/auth/register | username, Email, password | -             |
+| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                         | by role       |
+| Add new todo                                                      | POST<br>/v1/todos      | todo, priority            | -             |
+| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate     | by username   |
+| Delete todo                                                       | DEL<br>/v1/todos/:id   |                           | by username   |
+
+
+
+## Users for test
 
 - admin
-  
-  ```json
-  {
-  "username":"rpb"
-  "password":"rpb123"
-  }
-  ```
+
+```json
+{
+"username":"rpb"
+"password":"rpb123"
+}
+```
 
 - guest
-  
-  ```json
-  {
-  "username":"rpb2"
-  "password":"rpb123"
-  }
-  ```
-  
-  ## Deployment
+
+```json
+{
+"username":"rpb2"
+"password":"rpb123"
+}
+```
+
+## Deployment
+
+###### Both BE and FE Deployed to Firebase
 
 - Front-end: https://milestone3-rpb.web.app
 
