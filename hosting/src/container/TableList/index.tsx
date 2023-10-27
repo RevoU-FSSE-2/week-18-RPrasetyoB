@@ -256,54 +256,62 @@ const TableList: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {itemsOnCurrentPage.map((todo, index) => {
-                const labelId = `checkbox-list-label-${todo._id}`;
-                const priorityColorStyle = {
-                  color: todo.priority === 'high' ? 'red' :
-                    todo.priority === 'medium' ? 'orange' : 'black'
-                };
-                const priorityBGstyle = {
-                  background: todo.priority === 'high' ? 'red' :
-                    todo.priority === 'medium' ? 'orange' : 'black'
-                };
-
-                return (
-                  <tr key={todo._id}>
-                    <td>
-                      <ListItem disablePadding>
-                        <ListItemButton role={undefined}>
-                          <ListItemText
-                            style={{ ...priorityColorStyle, textDecoration: todo.status == "done" ? 'line-through' : '', width:"30%" }}
-                            id={labelId}
-                            primary={todo.todo}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    </td>
-                    <td style={{ textAlign: 'center' }}>
-                      <span style={{ ...priorityBGstyle, color: 'white', padding: 5, paddingTop: 2, borderRadius: 10, textDecoration: todo.status == "done" ? 'line-through' : '', marginRight: 20 }}>{todo.priority}</span>
-                    </td>
-                    <td style={{ textDecoration: todo.status == "done" ? 'line-through' : '', paddingLeft: 5}}>{formatDueDate(todo.dueDate)}</td>
-                    <td style={{ textDecoration: todo.status == "done"  ? 'line-through' : '', paddingLeft: 5}}>{todo.maker}</td>
-                    <td>
-                      <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <IconButton edge="end" onClick={() => editClick(todo)}>
-                          <EditTwoToneIcon />
-                        </IconButton>
-                        <EditModal
-                          open={editModalOpen}
-                          onClose={() => {setEditModalOpen(false); setOpenBackdrop(false)}}
-                          editTodo={editTodo}
-                          handleEditInputChange={handleEditInputChange}
-                          handleCloseBackDrop={handleCloseBackdrop}/>
-                        <IconButton edge="end" onClick={() => deleteList(todo._id)}>
-                          <DeleteTwoToneIcon />
-                        </IconButton>
-                      </div>
+            {todolist.length === 0 ? (
+                  <tr style={{width: "100%", textAlign: 'center', paddingTop: 20}}>
+                    <td colSpan={5} style={{paddingLeft: 28, paddingTop: 20}}>
+                      &nbsp;No data
                     </td>
                   </tr>
-                );
-              })}
+                ) : (
+                  itemsOnCurrentPage.map((todo, index) => {
+                    const labelId = `checkbox-list-label-${todo._id}`;
+                    const priorityColorStyle = {
+                      color: todo.priority === 'high' ? 'red' :
+                        todo.priority === 'medium' ? 'orange' : 'black'
+                    };
+                    const priorityBGstyle = {
+                      background: todo.priority === 'high' ? 'red' :
+                        todo.priority === 'medium' ? 'orange' : 'black'
+                    };
+    
+                    return (
+                      <tr key={todo._id}>
+                        <td>
+                          <ListItem disablePadding>
+                            <ListItemButton role={undefined}>
+                              <ListItemText
+                                style={{ ...priorityColorStyle, textDecoration: todo.status == "done" ? 'line-through' : '', width:"30%" }}
+                                id={labelId}
+                                primary={todo.todo}
+                              />
+                            </ListItemButton>
+                          </ListItem>
+                        </td>
+                        <td style={{ textAlign: 'center' }}>
+                          <span style={{ ...priorityBGstyle, color: 'white', padding: 5, paddingTop: 2, borderRadius: 10, textDecoration: todo.status == "done" ? 'line-through' : '', marginRight: 20 }}>{todo.priority}</span>
+                        </td>
+                        <td style={{ textDecoration: todo.status == "done" ? 'line-through' : '', paddingLeft: 5}}>{formatDueDate(todo.dueDate)}</td>
+                        <td style={{ textDecoration: todo.status == "done"  ? 'line-through' : '', paddingLeft: 5}}>{todo.maker}</td>
+                        <td>
+                          <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <IconButton edge="end" onClick={() => editClick(todo)}>
+                              <EditTwoToneIcon />
+                            </IconButton>
+                            <EditModal
+                              open={editModalOpen}
+                              onClose={() => {setEditModalOpen(false); setOpenBackdrop(false)}}
+                              editTodo={editTodo}
+                              handleEditInputChange={handleEditInputChange}
+                              handleCloseBackDrop={handleCloseBackdrop}/>
+                            <IconButton edge="end" onClick={() => deleteList(todo._id)}>
+                              <DeleteTwoToneIcon />
+                            </IconButton>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}              
             </tbody>
           </table>
         </List>
