@@ -2,8 +2,6 @@
 
 Development project from designing, building, and maintaining both the server-side (back end) and client-side (front end) components of an application. This individual manages the entire software stack, ensuring the integration and functionality of both ends for a complete user experience.
 
-
-
 ## Table of content
 
 - Technologies used
@@ -27,8 +25,6 @@ Development project from designing, building, and maintaining both the server-si
 - BE: NodeJs / Express
 
 - FE: React
-
-
 
 ## Front-end sneak peek
 
@@ -143,16 +139,14 @@ if(todoId.maker == username){
 
 ## API End Point
 
-|                                                                   | Endpoint               | Req body                  | Authorization |
-| ----------------------------------------------------------------- | ---------------------- | ------------------------- | ------------- |
-| Login                                                             | POST /v1/auth/login    | username, password        | -             |
-| Register                                                          | POST /v1/auth/register | username, Email, password | -             |
-| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                         | by role       |
-| Add new todo                                                      | POST<br>/v1/todos      | todo, priority            | -             |
-| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate     | by username   |
-| Delete todo                                                       | DEL<br>/v1/todos/:id   |                           | by username   |
-
-
+|                                                                   | Endpoint               | Req body                                                                                    | Authorization |
+| ----------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------- | ------------- |
+| Login                                                             | POST /v1/auth/login    | username, password                                                                          | -             |
+| Register                                                          | POST /v1/auth/register | username, Email, password                                                                   | -             |
+| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                                                                                           | by role       |
+| Add new todo                                                      | POST<br>/v1/todos      | todo, priority<br/>(status auto set to "in progress", and dueDate auto set to 2 days ahead) | -             |
+| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate                                                                       | by username   |
+| Delete todo                                                       | DEL<br>/v1/todos/:id   |                                                                                             | by username   |
 
 ## Users for test
 
@@ -182,4 +176,4 @@ if(todoId.maker == username){
 
 - Back-end: https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
 
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/-Z3-Ss4P)
+![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)
