@@ -139,14 +139,14 @@ if(todoId.maker == username){
 
 ## API End Point
 
-|                                                                   | Endpoint               | Req body                                                                                    | Authorization |
-| ----------------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------- | ------------- |
-| Login                                                             | POST /v1/auth/login    | username, password                                                                          | -             |
-| Register                                                          | POST /v1/auth/register | username, Email, password                                                                   | -             |
-| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                                                                                           | by role       |
-| Add new todo                                                      | POST<br>/v1/todos      | todo, priority<br/>(status auto set to "in progress", and dueDate auto set to 2 days ahead) | -             |
-| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate                                                                       | by username   |
-| Delete todo                                                       | DEL<br>/v1/todos/:id   |                                                                                             | by username   |
+|                                                                   | Endpoint               | Req body                                                                                       | Authorization |
+| ----------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
+| Login                                                             | POST /v1/auth/login    | username, password                                                                             | -             |
+| Register                                                          | POST /v1/auth/register | username, Email, password                                                                      | -             |
+| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                                                                                              | by role       |
+| Add new todo                                                      | POST<br>/v1/todos      | todo, priority<br/>(status auto set to "in progress"<br/>and dueDate auto set to 2 days ahead) | -             |
+| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate                                                                          | by username   |
+| Delete todo                                                       | DEL<br>/v1/todos/:id   |                                                                                                | by username   |
 
 ## Users for test
 
